@@ -94,6 +94,26 @@ module.exports = function(grunt) {
             }
         },
         connect: {
+            prod: {
+                options: {
+                    port: 8080,
+                    hostname: 'localhost',
+                    livereload: true
+                }
+            },
+            dev: {
+                options: {
+                    port: 8080,
+                    hostname: 'localhost',
+                    livereload: true,
+                    base: {
+                        path: './',
+                        options: {
+                            index: 'index-dev.html'
+                        }
+                    }
+                }
+            }
             server: {
                 options: {
                     port: 8080,
@@ -121,5 +141,5 @@ module.exports = function(grunt) {
     grunt.registerTask('test-ci', ['qunit']);
     grunt.registerTask('build', ['concat', 'uglify']);
     grunt.registerTask('doc', ['jsdoc']);
-    grunt.registerTask('dev', ['watch:build']);
+    grunt.registerTask('dev', ['watch:build', 'connect:prod']);
 };
