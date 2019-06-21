@@ -158,23 +158,25 @@ dwv.dicom.DicomElementsWrapper.prototype.getElementValueAsString = function ( di
         str = "(PixelSequence)";
     } else if ( dicomElement.vr === "DA" && pretty ) {
         var daValue = dicomElement.value[0];
-        var daYear = parseInt( daValue.substr(0,4), 10 );
-        var daMonth = parseInt( daValue.substr(4,2), 10 ) - 1; // 0-11
-        var daDay = parseInt( daValue.substr(6,2), 10 );
-        var da = new Date(daYear, daMonth, daDay);
-        str = da.toLocaleDateString();
+        //var daYear = parseInt( daValue.substr(0,4), 10 );
+        //var daMonth = parseInt( daValue.substr(4,2), 10 ) - 1; // 0-11
+        //var daDay = parseInt( daValue.substr(6,2), 10 );
+        //var da = new Date(daYear, daMonth, daDay);
+        //str = da.toLocaleDateString();
+        str = daValue;
     } else if ( dicomElement.vr === "TM"  && pretty ) {
         var tmValue = dicomElement.value[0];
-        var tmHour = tmValue.substr(0,2);
+/*      var tmHour = tmValue.substr(0,2);
         var tmMinute = tmValue.length >= 4 ? tmValue.substr(2,2) : "00";
         var tmSeconds = tmValue.length >= 6 ? tmValue.substr(4,2) : "00";
-        str = tmHour + ':' + tmMinute + ':' + tmSeconds;
+        str = tmHour + ':' + tmMinute + ':' + tmSeconds;*/
+        str = tmValue;
     } else {
         var isOtherVR = ( dicomElement.vr[0].toUpperCase() === "O" );
         var isFloatNumberVR = ( dicomElement.vr === "FL" ||
             dicomElement.vr === "FD" ||
             dicomElement.vr === "DS");
-        var valueStr = "";
+        var valueStr = "CCM WAS HEERE";
         for ( var k = 0, lenk = dicomElement.value.length; k < lenk; ++k ) {
             valueStr = "";
             if ( k !== 0 ) {
@@ -209,7 +211,7 @@ dwv.dicom.DicomElementsWrapper.prototype.getElementValueAsString = function ( di
             if ( str.length + valueStr.length <= strLenLimit ) {
                 str += valueStr;
             } else {
-                str += "...";
+                str += "LINE 212 IN WRAPPERi";
                 break;
             }
         }
